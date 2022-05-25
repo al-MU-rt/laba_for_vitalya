@@ -49,7 +49,7 @@ class Main:
 
 
     def matrix_making(self):
-        self.matrix = [[0 for i in range(self.nodes_num)] for i in range(self.nodes_num)]
+        self.matrix_make = [[0 for i in range(self.nodes_num)] for i in range(self.nodes_num)]
 
         for i in range(self.nodes_num):
             lab_1 = Label(self.frame_2, text=i + 1,
@@ -63,12 +63,12 @@ class Main:
 
         for i in range(self.nodes_num):
             for j in range(self.nodes_num):
-                self.matrix[i][j] = Entry(self.frame_2, width=5, bg = '#00F7FF')
-                self.matrix[i][j].grid(row=i + 1, column=j + 1)
+                self.matrix_make[i][j] = Entry(self.frame_2, width=5, bg = '#00F7FF')
+                self.matrix_make[i][j].grid(row=i + 1, column=j + 1)
 
         self.but_3 = Button(self.window, text='Створити граф',
                             bg = '#00F7FF',
-                            command=self.Graf)
+                            command=self.Graph)
         self.but_3.pack()
 
     # Метод для графу
@@ -81,7 +81,7 @@ class Main:
 
     def nodes(self):
         try:
-            self.number_of_nodes = int(self.entry1.get())
+            self.nodes_num = int(self.entry1.get())
         except:
             showerror("Помилка !",
                       "Введено не коректні дані")
