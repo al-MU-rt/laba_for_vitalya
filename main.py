@@ -85,3 +85,4 @@ class Main:
         except:
             showerror("Помилка !",
                       "Введено не коректні дані")
+Main()
