@@ -50,11 +50,10 @@ class Main:
         self.matrix_make = [[0 for i in range(self.nodes_num)] for i in range(self.nodes_num)]
 
         for i in range(self.nodes_num):
-            lab = Label(self.frame_2, text=i + 1,
+            lab_1 = Label(self.frame_2, text=i + 1,
                           bg='#FFFF99')
-            lab.grid(row=i + 1, column=0)
+            lab_1.grid(row=i + 1, column=0)
 
-        for i in range(self.nodes_num):
             lab = Label(self.frame_2, text=i + 1,
                           bg='#FFFF99')
             lab.grid(row=0, column=i + 1)
@@ -74,7 +73,6 @@ class Main:
             for i in range(self.nodes_num):
                 if self.matrix_make[j][i].get() == "1":
                     self.edges.append([j + 1, i + 1])
-
         G = nx.DiGraph()
         G.add_edges_from(self.edges, color='r')
         nx.draw(G, with_labels=True)
