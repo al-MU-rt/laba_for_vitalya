@@ -73,6 +73,10 @@ class Main:
             for i in range(self.nodes_num):
                 if self.matrix_make[j][i].get() == "1":
                     self.edges.append([j + 1, i + 1])
+
+
+        self.coloring_graph()
+
         G = nx.DiGraph()
         G.add_edges_from(self.edges, color='r')
         nx.draw(G, with_labels=True)
@@ -80,7 +84,52 @@ class Main:
 
     #Метод для алгоритму
     def coloring_graph(self):
-        pass
+        print(self.nodes_num)
+        print(self.edges)
+
+        list_of_degre=[0 for i in range(self.nodes_num)]
+        self.color=[0 for i in range(self.nodes_num)]
+
+        for i in range(self.nodes_num):
+            for j in range(self.nodes_num):
+                if self.matrix_make[j][i].get() == "1":
+                    list_of_degre[i]+=1
+                if self.matrix_make[i][j].get() == "1":
+                    list_of_degre[i]+=1
+
+        print(list_of_degre)
+
+        self.curr_col=1
+        a = max(list_of_degre)
+        b = list_of_degre.index(a)
+
+
+        while (0 in self.color):
+            a = max(list_of_degre)
+            b = list_of_degre.index(a)
+            self.color[b] = self.curr_col
+
+            list_of_degre[b]=0
+            adjacency_list=[0 for i in range(self.nodes_num)]
+
+            while(0 in adjacency_list ):
+                adjacency_list[b] = 0
+
+                for i in range(self.nodes_num):
+                    if [b,i] in self.edges or [i,b] in self.edges:
+                        adjacency_list[i] = 1
+
+                for i in range(len(adjacency_list)):
+                    if adjacency_list[i] == 0 and list_of_degre[i] != 0:
+                        self.color[i] = self.curr_col
+                        list_of_degre[i]=0
+
+
+
+
+
+
+
 
     def nodes(self):
         try:
