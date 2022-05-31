@@ -77,9 +77,25 @@ class Main:
 
         self.coloring_graph()
 
+
+
+
         G = nx.DiGraph()
         G.add_edges_from(self.edges, color='r')
-        nx.draw(G,node_color=self.color,  with_labels=True)
+
+        print(self.color)
+
+        for i in self.color:
+            i = i/10
+
+
+        mm=dict()
+        for i in range(self.nodes_num):
+            mm[i+1]=self.color[i]
+
+
+
+        nx.draw(G,nodelist=mm,node_color = self.color,  with_labels=True)
         plt.show()
 
     #Метод для алгоритму
@@ -98,19 +114,11 @@ class Main:
 
 
         self.curr_col=0
-        a = max(list_of_degre)
-        b = list_of_degre.index(a)
 
 
         while (0 in self.color):
             a = max(list_of_degre)
-
-            if a==0:
-                for i in range(len(self.color)):
-                    if self.color[i]==0:
-                        b=i
-            else:
-                b = list_of_degre.index(a)
+            b = list_of_degre.index(a)
             self.curr_col+=1
             self.color[b] = self.curr_col
 
@@ -118,17 +126,22 @@ class Main:
             adjacency_list=[0 for i in range(self.nodes_num)]
 
             while(0 in adjacency_list ):
-                adjacency_list[b] = 0
+                adjacency_list[b] = 1
 
 
                 for i in range(self.nodes_num):
                     if [b+1,i+1] in self.edges or [i+1,b+1] in self.edges or  self.color[i] != 0 :
                         adjacency_list[i] = 1
 
+
                 for i in range(len(adjacency_list)):
                     if adjacency_list[i] == 0 :
                         self.color[i] = self.curr_col
                         list_of_degre[i] = 0
+                        b=i
+                        break
+
+
 
 
 
